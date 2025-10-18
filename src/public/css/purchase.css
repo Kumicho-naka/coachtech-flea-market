@@ -1,0 +1,351 @@
+/* 商品購入画面・送付先住所変更画面 */
+
+.purchase-container {
+    max-width: 1512px;
+    margin: 0 auto;
+    padding: 93px 80px;
+    background: #ffffff;
+}
+
+.purchase-content {
+    display: flex;
+    gap: 102px;
+}
+
+.purchase-left {
+    flex: 1;
+    max-width: 805px;
+}
+
+.purchase-right {
+    width: 440px;
+    flex-shrink: 0;
+}
+
+/* 商品情報 */
+.purchase-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-bottom: 40px;
+}
+
+.item-image-small {
+    width: 177.53px;
+    height: 177.53px;
+    background-color: #d9d9d9;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.item-image-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-info {
+    flex: 1;
+    padding-top: 0;
+}
+
+.item-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.item-price {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #000000;
+    margin: 40px 0;
+}
+
+.section-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.change-link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #0073cc;
+    text-decoration: none;
+}
+
+.change-link:hover {
+    text-decoration: underline;
+}
+
+/* 支払い方法ドロップダウン */
+.payment-dropdown {
+    position: relative;
+    width: 265px;
+}
+
+.dropdown-selected {
+    height: 31px;
+    padding: 0 16px;
+    border: 1px solid #5f5f5f;
+    border-radius: 4px;
+    background: #ffffff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #5f5f5f;
+}
+
+.dropdown-selected::after {
+    content: '▼';
+    font-size: 10px;
+    color: #5f5f5f;
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 269px;
+    margin-top: 2px;
+    background: #636769;
+    border: 1.5px solid #b1b1b1;
+    border-radius: 5px;
+    z-index: 10;
+    display: none;
+    overflow: hidden;
+}
+
+.dropdown-options.show {
+    display: block;
+}
+
+.dropdown-option {
+    height: 30px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    color: #eaeaea;
+    transition: background-color 0.2s;
+}
+
+.dropdown-option:hover,
+.dropdown-option.selected {
+    background-color: #5599eb;
+}
+
+/* 配送先住所 */
+.shipping-section {
+    margin-bottom: 40px;
+}
+
+.shipping-address {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.address-line {
+    margin-bottom: 8px;
+}
+
+/* 購入サマリー */
+.purchase-summary {
+    border: none;
+    padding: 0;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 115px;
+    border: 1px solid #000000;
+    border-bottom: none;
+    padding: 0;
+}
+
+.summary-row:last-of-type {
+    border-bottom: 1px solid #000000;
+    margin-bottom: 66px;
+}
+
+.summary-label,
+.summary-value {
+    width: 220px;
+    height: 115px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.summary-label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    border-right: 1px solid #000000;
+}
+
+.summary-value {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+/* 購入ボタン */
+.button-purchase {
+    width: 100%;
+    height: 60px;
+    background-color: #ff5555;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button-purchase:hover {
+    background-color: #e74444;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .purchase-container {
+        padding: 60px 40px;
+    }
+
+    .purchase-content {
+        gap: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .purchase-container {
+        padding: 40px 20px;
+    }
+
+    .purchase-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .purchase-left {
+        max-width: 100%;
+    }
+
+    .purchase-right {
+        width: 100%;
+    }
+
+    .purchase-item {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .item-image-small {
+        width: 120px;
+        height: 120px;
+    }
+
+    .item-title,
+    .item-price {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .payment-dropdown {
+        width: 100%;
+        max-width: 265px;
+    }
+
+    .dropdown-options {
+        width: 100%;
+    }
+
+    .summary-row {
+        height: 80px;
+    }
+
+    .summary-label,
+    .summary-value {
+        height: 80px;
+        font-size: 16px;
+    }
+
+    .summary-value {
+        font-size: 18px;
+    }
+
+    .button-purchase {
+        height: 50px;
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,505 @@
+/* 商品一覧・詳細画面専用CSS */
+
+/* 商品一覧 */
+.items-container {
+    max-width: 1512px;
+    margin: 0 auto;
+    padding: 70px 69px;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 290px);
+    gap: 77px 71.5px;
+    justify-content: start;
+}
+
+.item-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.item-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s;
+}
+
+.item-image {
+    width: 290px;
+    height: 290px;
+    background-color: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    color: #000000;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-name {
+    width: 290px;
+    height: 30px;
+    margin-top: 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    color: #000000;
+}
+
+/* Soldバッジ */
+.sold-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    pointer-events: none;
+}
+
+.sold-badge {
+    margin: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+/* 商品詳細ページ */
+.product-detail {
+    display: flex;
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 95px 45px 95px 45px;
+    gap: 65px;
+    background: #ffffff;
+}
+
+.product-image-section {
+    flex: 0 0 600px;
+}
+
+.product-image-large {
+    width: 600px;
+    height: 600px;
+    background-color: #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    color: #000000;
+    overflow: hidden;
+}
+
+.product-image-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info-section {
+    flex: 1;
+    max-width: 570px;
+}
+
+.product-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 54px;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.product-brand {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+/* いいね・コメントボタン */
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.like-button,
+.like-display {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.like-button .star-icon,
+.like-display .star-icon {
+    font-size: 24px;
+    color: #666;
+}
+
+.like-button.liked .star-icon {
+    color: #ffd700;
+}
+
+.comment-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.comment-display .comment-icon {
+    font-size: 24px;
+    color: #666;
+}
+
+/* 購入ボタン */
+.purchase-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 570px;
+    height: 56px;
+    background-color: #ff5555;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: background-color 0.2s;
+}
+
+.purchase-button:hover:not([disabled]) {
+    background-color: #e74444;
+}
+
+.purchase-button[disabled] {
+    background-color: #d9d9d9;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+/* 商品説明 */
+.product-description {
+    margin-bottom: 40px;
+    width: 570px;
+}
+
+.product-description h2 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.product-description p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    word-wrap: break-word;
+}
+
+/* 商品の情報テーブル */
+.product-info-table {
+    margin-bottom: 40px;
+    width: 570px;
+}
+
+.product-info-table h2 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    padding: 16px 0;
+    width: 570px;
+}
+
+.info-label {
+    width: 140px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+.info-value {
+    flex: 1;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+/* カテゴリーバッジ */
+.category-badge {
+    display: inline-block;
+    background-color: #d9d9d9;
+    padding: 3px 20px;
+    border-radius: 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    margin-right: 8px;
+}
+
+/* コメントセクション */
+.comments-section {
+    margin-top: 40px;
+}
+
+.comments-title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #5f5f5f;
+    margin-bottom: 40px;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.comment-form {
+    width: 100%;
+}
+
+.comment-form h3 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.comment-form .form-textarea {
+    width: 100%;
+    min-height: 246px;
+    padding: 16px;
+    border: 2px solid #5f5f5f;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #ffffff;
+    resize: vertical;
+    transition: border-color 0.2s;
+    margin-bottom: 16px;
+}
+
+.comment-form .form-textarea:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.comment-form .button-submit {
+    width: 100%;
+    height: 100px;
+    font-size: 30px;
+}
+
+.comment-item {
+    display: flex;
+    gap: 12px;
+}
+
+.comment-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.comment-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-author {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.comment-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    background: #e5e5e5;
+    padding: 20px 15px;
+    border-radius: 5px;
+}
+
+.empty-comment-message {
+    text-align: center;
+    color: #666;
+    padding: 40px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .items-grid {
+        grid-template-columns: repeat(3, 290px);
+        justify-content: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .items-grid {
+        grid-template-columns: repeat(2, 290px);
+        gap: 40px 30px;
+    }
+
+    .items-container {
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .items-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 20px;
+    }
+
+    .item-image,
+    .item-name {
+        width: 100%;
+    }
+
+    .item-image {
+        height: 200px;
+        font-size: 32px;
+    }
+
+    .item-name {
+        font-size: 18px;
+        height: auto;
+    }
+
+    .product-detail {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .items-container {
+        padding: 30px 15px;
+    }
+
+    .item-image {
+        height: 180px;
+        font-size: 28px;
+    }
+
+    .item-name {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,178 @@
+/* 送付先住所変更画面 */
+
+.address-container {
+    position: relative;
+    width: 100%;
+    max-width: 1512px;
+    min-height: calc(100vh - 80px);
+    margin: 0 auto;
+    background: #FFFFFF;
+}
+
+.address-title {
+    position: absolute;
+    width: 180px;
+    height: 44px;
+    left: 50%;
+    top: 128px;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+}
+
+.address-form {
+    position: absolute;
+    width: 680px;
+    left: 50%;
+    top: 275px;
+    transform: translateX(-50%);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 92px;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 156px;
+}
+
+.form-label {
+    display: block;
+    width: auto;
+    height: 36px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin: 0 0 7px 0;
+}
+
+.form-input {
+    box-sizing: border-box;
+    width: 680px;
+    height: 45px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 0 16px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 45px;
+    color: #000000;
+    background: #FFFFFF;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #FF5555;
+}
+
+.form-input::placeholder {
+    color: #999999;
+}
+
+.form-input.is-error {
+    border-color: #FF5555;
+}
+
+.error-message {
+    color: #FF5555;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    margin: 4px 0 0 0;
+}
+
+.button-submit {
+    width: 680px;
+    height: 60px;
+    background: #FF5555;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+
+.button-submit:hover {
+    background: #e74c4c;
+}
+
+.button-submit:active {
+    background: #d43f3f;
+}
+
+/* レスポンシブ対応：1540px以下 */
+@media (max-width: 1540px) {
+    .address-container {
+        padding: 0 20px;
+    }
+
+    .address-form {
+        width: calc(100% - 40px);
+        max-width: 680px;
+    }
+
+    .form-input,
+    .button-submit {
+        width: 100%;
+    }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .address-title {
+        font-size: 28px;
+        line-height: 36px;
+        top: 80px;
+        width: auto;
+        height: auto;
+    }
+
+    .address-form {
+        top: 160px;
+    }
+
+    .form-group {
+        margin-bottom: 60px;
+    }
+
+    .form-group:last-of-type {
+        margin-bottom: 100px;
+    }
+
+    .form-label {
+        font-size: 20px;
+        line-height: 24px;
+        height: auto;
+    }
+
+    .form-input {
+        height: 40px;
+        font-size: 14px;
+        line-height: 40px;
+    }
+
+    .button-submit {
+        height: 50px;
+        font-size: 22px;
+        line-height: 28px;
+    }
+}

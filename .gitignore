@@ -1,0 +1,8 @@
+docker/mysql/data/
+/vendor/
+/node_modules/
+/storage/
+.env
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,247 @@
+/* リセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー (Figma: height 82px, background #000000) */
+.auth-header {
+    background-color: #000000;
+    height: 82px;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+}
+
+.auth-logo {
+    display: block;
+}
+
+.auth-logo img {
+    height: 36px;
+    width: auto;
+}
+
+/* メインコンテナ (Figma: 680px width, centered at left: 416px, top: 178px) */
+.auth-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 96px;
+    background-color: #ffffff;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 680px;
+    position: relative;
+}
+
+/* タイトル (Figma: font-size 36px, font-weight 700, centered) */
+.auth-title {
+    text-align: center;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    margin-bottom: 48px;
+}
+
+/* フォーム */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* フォームグループの間隔調整 (Figmaの位置から計算) */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 36px;
+}
+
+/* ラベル (Figma: font-size 24px, font-weight 700) */
+.form-label {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+/* 入力欄 (Figma: border 1px solid #5F5F5F, border-radius 4px) */
+.form-input {
+    box-sizing: border-box;
+    padding: 12px 16px;
+    border: 1px solid #5f5f5f;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #ffffff;
+    transition: border-color 0.2s;
+    height: 58px;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.form-input.error {
+    border-color: #ff5555;
+}
+
+.error-message {
+    color: #ff5555;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* 送信ボタン (Figma: background #FF5555, border-radius 5px, centered at 27.52%~72.41%) */
+.button-submit {
+    width: 305px;
+    margin: 40px auto 24px;
+    background-color: #ff5555;
+    color: #ffffff;
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button-submit:hover {
+    background-color: #e74444;
+}
+
+/* リンク (Figma: font-size 20px, color #0073CC, centered) */
+.auth-link {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.auth-link a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #0073cc;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .auth-header {
+        height: 60px;
+        padding: 0 15px;
+    }
+
+    .auth-logo img {
+        height: 28px;
+    }
+
+    .auth-container {
+        padding-top: 60px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .auth-card {
+        max-width: 100%;
+    }
+
+    .auth-title {
+        font-size: 28px;
+        line-height: 34px;
+        margin-bottom: 36px;
+    }
+
+    .form-label {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 28px;
+    }
+
+    .form-input {
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .button-submit {
+        width: 100%;
+        max-width: 305px;
+        font-size: 22px;
+        padding: 16px;
+    }
+
+    .auth-link a {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding-top: 40px;
+    }
+
+    .auth-title {
+        font-size: 24px;
+        line-height: 29px;
+        margin-bottom: 28px;
+    }
+
+    .form-label {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-input {
+        height: 46px;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .button-submit {
+        width: 100%;
+        font-size: 20px;
+        padding: 14px;
+        margin: 32px auto 20px;
+    }
+
+    .auth-link a {
+        font-size: 16px;
+    }
+}
