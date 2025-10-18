@@ -384,4 +384,4 @@ php artisan view:clear
 ## 既知の制限事項
 
 - メール認証機能は未実装です
-- レスポンシブ対応は PC（1400-1540px）のみ対応しています
+- レスポンシブ対応は PC（1400-1540px）のみ対応しています# coachtech-flea-market
