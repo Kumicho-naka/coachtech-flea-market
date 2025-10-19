@@ -1,0 +1,120 @@
+/* メール認証誘導画面 */
+.verify-email-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+}
+
+.verify-email-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 82px;
+    background: #000000;
+    z-index: 1000;
+}
+
+.verify-email-logo {
+    position: absolute;
+    width: 370px;
+    height: 36px;
+    left: 25px;
+    top: 23px;
+}
+
+.verify-email-content {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.verification-message {
+    width: 720px;
+    margin: 0 auto 120px;
+}
+
+.verification-message h2 {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+}
+
+.verification-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.button-verify {
+    box-sizing: border-box;
+    width: 257px;
+    height: 69px;
+    background: #D9D9D9;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.button-verify span {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #000000;
+}
+
+.button-verify:hover {
+    background: #C0C0C0;
+}
+
+.resent-message {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #28a745;
+    background-color: #d4edda;
+    padding: 12px 24px;
+    border-radius: 4px;
+}
+
+.resend-form {
+    margin-top: 20px;
+}
+
+.button-resend {
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #0073CC;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+}
+
+.button-resend:hover {
+    text-decoration: underline;
+}

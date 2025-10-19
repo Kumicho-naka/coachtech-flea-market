@@ -34,16 +34,24 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });
 
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
+        });
+
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request)
             {
-                return redirect('/mypage/profile');
+                return redirect()->route('verification.notice');
             }
         });
 
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request)
             {
+                if (!$request->user()->hasVerifiedEmail()) {
+                    return redirect()->route('verification.notice');
+                }
+
                 return redirect('/');
             }
         });
@@ -56,6 +64,14 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::authenticateUsing(function (Request $request) {
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ], [
+                'email.required' => 'メールアドレスを入力してください',
+                'password.required' => 'パスワードを入力してください',
+            ]);
+
             $user = User::where('email', $request->email)->first();
 
             if ($user && Hash::check($request->password, $user->password)) {

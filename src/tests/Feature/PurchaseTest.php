@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Condition;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 use Tests\TestCase;
 
 class PurchaseTest extends TestCase
@@ -34,6 +36,7 @@ class PurchaseTest extends TestCase
         parent::setUp();
         $this->seed(\Database\Seeders\CategorySeeder::class);
         $this->seed(\Database\Seeders\ConditionSeeder::class);
+        Stripe::setApiKey(config('services.stripe.secret'));
     }
 
     /**
@@ -81,7 +84,38 @@ class PurchaseTest extends TestCase
 
         // Stripe決済画面へのリダイレクトを確認
         $response->assertStatus(302);
-        $this->assertTrue(str_contains($response->headers->get('Location'), 'checkout.stripe.com'));
+        $redirectUrl = $response->headers->get('Location');
+        $this->assertTrue(str_contains($redirectUrl, 'checkout.stripe.com'));
+
+        // URLからセッションIDを取得
+        $urlParts = parse_url($redirectUrl);
+        $path = $urlParts['path'] ?? '';
+        $pathSegments = explode('/', $path);
+        $sessionId = end($pathSegments);
+
+        // cs_test_ で始まることを確認
+        $this->assertStringStartsWith('cs_test_', $sessionId);
+
+        // 決済完了をシミュレート（successページに直接アクセス）
+        $successResponse = $this->actingAs($buyer)->get("/purchase/{$item->id}/success?session_id={$sessionId}");
+
+        $successResponse->assertRedirect(self::HOME_URL);
+
+        // 購入情報がデータベースに保存されていることを確認
+        $this->assertDatabaseHas('purchases', [
+            'user_id' => $buyer->id,
+            'item_id' => $item->id,
+            'payment_method' => self::PAYMENT_METHOD,
+            'postal_code' => self::POSTAL_CODE,
+            'address' => self::ADDRESS,
+            'building' => self::BUILDING,
+        ]);
+
+        // 商品が売り切れになっていることを確認
+        $this->assertDatabaseHas('items', [
+            'id' => $item->id,
+            'is_sold' => true,
+        ]);
     }
 
     /**

@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Condition;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 use Tests\TestCase;
 
 class AddressTest extends TestCase
@@ -34,6 +36,7 @@ class AddressTest extends TestCase
         parent::setUp();
         $this->seed(\Database\Seeders\CategorySeeder::class);
         $this->seed(\Database\Seeders\ConditionSeeder::class);
+        Stripe::setApiKey(config('services.stripe.secret'));
     }
 
     /**
@@ -138,6 +141,24 @@ class AddressTest extends TestCase
 
         // Stripe決済画面へのリダイレクトを確認
         $response->assertStatus(302);
-        $this->assertTrue(str_contains($response->headers->get('Location'), 'checkout.stripe.com'));
+        $redirectUrl = $response->headers->get('Location');
+
+        // URLからセッションIDを取得
+        $urlParts = parse_url($redirectUrl);
+        $path = $urlParts['path'] ?? '';
+        $pathSegments = explode('/', $path);
+        $sessionId = end($pathSegments);
+
+        // 決済完了をシミュレート
+        $this->actingAs($buyer)->get("/purchase/{$item->id}/success?session_id={$sessionId}");
+
+        // 購入情報に変更した住所が保存されていることを確認
+        $this->assertDatabaseHas('purchases', [
+            'user_id' => $buyer->id,
+            'item_id' => $item->id,
+            'postal_code' => self::NEW_POSTAL_CODE,
+            'address' => self::NEW_ADDRESS,
+            'building' => self::NEW_BUILDING,
+        ]);
     }
 }

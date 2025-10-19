@@ -30,4 +30,11 @@ class PurchaseRequest extends FormRequest
             'address.required' => '住所を入力してください',
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        if ($this->payment_method === '') {
+            $this->merge(['payment_method' => null]);
+        }
+    }
 }

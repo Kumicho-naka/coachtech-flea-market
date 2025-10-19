@@ -8,6 +8,7 @@ use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\AddressRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
@@ -15,7 +16,7 @@ class PurchaseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['webhook']);
         Stripe::setApiKey(config('services.stripe.secret'));
     }
 
@@ -36,9 +37,12 @@ class PurchaseController extends Controller
             return redirect()->route('items.index');
         }
 
-        // すべての支払い方法でStripe決済画面へ遷移
-        $session = Session::create([
-            'payment_method_types' => ['card'],
+        $paymentMethodTypes = $request->payment_method === 'コンビニ支払い'
+            ? ['konbini']
+            : ['card'];
+
+        $sessionData = [
+            'payment_method_types' => $paymentMethodTypes,
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'jpy',
@@ -57,10 +61,20 @@ class PurchaseController extends Controller
                 'user_id' => Auth::id(),
                 'postal_code' => $request->postal_code,
                 'address' => $request->address,
-                'building' => $request->building,
+                'building' => $request->building ?? '',
                 'payment_method' => $request->payment_method,
             ],
-        ]);
+        ];
+
+        if ($request->payment_method === 'コンビニ支払い') {
+            $sessionData['payment_method_options'] = [
+                'konbini' => [
+                    'expires_after_days' => 3,
+                ],
+            ];
+        }
+
+        $session = Session::create($sessionData);
 
         return redirect($session->url);
     }
@@ -70,7 +84,7 @@ class PurchaseController extends Controller
         if ($request->has('session_id')) {
             $session = Session::retrieve($request->session_id);
 
-            if ($session->payment_status === 'paid') {
+            if ($session->payment_status === 'paid' || $session->payment_status === 'unpaid') {
                 $metadata = $session->metadata;
 
                 $this->completePurchase($item, [
@@ -100,11 +114,20 @@ class PurchaseController extends Controller
         return redirect()->route('purchase.show', $item);
     }
 
-    // 購入情報をデータベースに保存
     private function completePurchase(Item $item, array $data)
     {
+        $userId = $data['user_id'] ?? Auth::id();
+
+        $existingPurchase = Purchase::where('user_id', $userId)
+            ->where('item_id', $item->id)
+            ->first();
+
+        if ($existingPurchase) {
+            return;
+        }
+
         Purchase::create([
-            'user_id' => Auth::id(),
+            'user_id' => $userId,
             'item_id' => $item->id,
             'payment_method' => $data['payment_method'],
             'postal_code' => $data['postal_code'],
@@ -113,5 +136,46 @@ class PurchaseController extends Controller
         ]);
 
         $item->update(['is_sold' => true]);
+    }
+
+
+    public function webhook(Request $request)
+    {
+        $payload = $request->getContent();
+        $sigHeader = $request->header('Stripe-Signature');
+        $endpointSecret = config('services.stripe.webhook_secret');
+
+        try {
+            if ($endpointSecret) {
+                $event = \Stripe\Webhook::constructEvent($payload, $sigHeader, $endpointSecret);
+            } else {
+                $event = json_decode($payload);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Webhook error'], 400);
+        }
+
+        // checkout.session.completedイベント
+        if ($event->type === 'checkout.session.completed') {
+            $session = $event->data->object;
+            $metadata = $session->metadata;
+
+            $item = Item::find($metadata->item_id);
+
+            if ($item && !$item->is_sold) {
+                Purchase::create([
+                    'user_id' => $metadata->user_id,
+                    'item_id' => $item->id,
+                    'payment_method' => $metadata->payment_method,
+                    'postal_code' => $metadata->postal_code,
+                    'address' => $metadata->address,
+                    'building' => $metadata->building ?? null,
+                ]);
+
+                $item->update(['is_sold' => true]);
+            }
+        }
+
+        return response()->json(['status' => 'success']);
     }
 }

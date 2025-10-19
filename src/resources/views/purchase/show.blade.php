@@ -40,6 +40,9 @@
                     <div class="dropdown-option" data-value="カード支払い">カード支払い</div>
                 </div>
             </div>
+            @error('payment_method')
+            <p class="error-message">{{ $message }}</p>
+            @enderror
 
             <hr class="divider">
 
@@ -83,7 +86,7 @@
 
                 <form method="POST" action="{{ route('purchase.store', $item) }}" id="purchaseForm">
                     @csrf
-                    <input type="hidden" name="payment_method" id="paymentMethodInput" value="コンビニ支払い">
+                    <input type="hidden" name="payment_method" id="paymentMethodInput" value="">
                     <input type="hidden" name="postal_code" value="{{ $address['postal_code'] }}">
                     <input type="hidden" name="address" value="{{ $address['address'] }}">
                     <input type="hidden" name="building" value="{{ $address['building'] ?? '' }}">

@@ -99,7 +99,7 @@ class RegisterTest extends TestCase
     }
 
     /**
-     * 全ての項目が入力されている場合、会員情報が登録され、プロフィール設定画面に遷移される
+     * 全ての項目が入力されている場合、会員情報が登録され、メール認証誘導画面に遷移される
      */
     public function testUserCanRegisterSuccessfully()
     {
@@ -115,7 +115,7 @@ class RegisterTest extends TestCase
             'email' => self::TEST_EMAIL,
         ]);
 
-        $response->assertRedirect('/mypage/profile');
+        $response->assertRedirect('/email/verify');
         $this->assertAuthenticated();
     }
 }
