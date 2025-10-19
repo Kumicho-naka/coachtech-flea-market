@@ -10,7 +10,7 @@ COACHTECHが開発した独自のフリマアプリケーション。
 ### Dockerビルド
 ```bash
 git clone https://github.com/Kumicho-naka/coachtech-flea-market.git
-cd coachtech-fleamarket
+cd coachtech-flea-market
 docker-compose up -d --build
 ```
 
