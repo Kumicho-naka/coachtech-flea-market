@@ -50,7 +50,7 @@
                 </form>
                 @else
                 <a href="{{ route('login') }}" class="navigation-link">ログイン</a>
-                <a href="{{ route('register') }}" class="navigation-link">マイページ</a>
+                <a href="{{ route('login') }}" class="navigation-link">マイページ</a>
                 <a href="{{ route('login') }}" class="button-primary">出品</a>
                 @endauth
             </nav>

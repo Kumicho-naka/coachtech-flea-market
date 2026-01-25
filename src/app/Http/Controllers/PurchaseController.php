@@ -8,7 +8,6 @@ use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\AddressRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 

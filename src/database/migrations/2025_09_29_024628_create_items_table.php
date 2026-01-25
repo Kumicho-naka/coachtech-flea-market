@@ -18,7 +18,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('condition_id')->constrained();
             $table->string('name');
-            $table->string('brand')->nullable();
+            $table->string('brand')->default('なし');
             $table->text('description');
             $table->decimal('price', 10, 0);
             $table->string('image');

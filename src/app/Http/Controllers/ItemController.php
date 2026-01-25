@@ -25,8 +25,8 @@ class ItemController extends Controller
             if (Auth::check()) {
                 // ログインユーザーがいいねした商品のみ取得
                 $query = Item::with(['categories', 'likes', 'user'])
-                    ->whereHas('likes', function ($q) {
-                        $q->where('user_id', Auth::id());
+                    ->whereHas('likes', function ($likeQuery) {
+                        $likeQuery->where('user_id', Auth::id());
                     });
             } else {
                 $query = Item::whereRaw('1 = 0');

@@ -38,7 +38,7 @@ class ItemSeeder extends Seeder
             [
                 'name' => '玉ねぎ3束',
                 'price' => 300,
-                'brand' => null,
+                'brand' => 'なし',
                 'description' => '新鮮な玉ねぎ3束のセット',
                 'image' => 'items/dummy3.jpg',
                 'condition' => 'やや傷や汚れあり',
@@ -47,7 +47,7 @@ class ItemSeeder extends Seeder
             [
                 'name' => '革靴',
                 'price' => 4000,
-                'brand' => null,
+                'brand' => 'なし',
                 'description' => 'クラシックなデザインの革靴',
                 'image' => 'items/dummy4.jpg',
                 'condition' => '状態が悪い',
@@ -56,7 +56,7 @@ class ItemSeeder extends Seeder
             [
                 'name' => 'ノートPC',
                 'price' => 45000,
-                'brand' => null,
+                'brand' => 'なし',
                 'description' => '高性能なノートパソコン',
                 'image' => 'items/dummy5.jpg',
                 'condition' => '良好',
@@ -65,7 +65,7 @@ class ItemSeeder extends Seeder
             [
                 'name' => 'マイク',
                 'price' => 8000,
-                'brand' => null,
+                'brand' => 'なし',
                 'description' => '高音質のレコーディング用マイク',
                 'image' => 'items/dummy6.jpg',
                 'condition' => '良好',
@@ -74,7 +74,7 @@ class ItemSeeder extends Seeder
             [
                 'name' => 'ショルダーバッグ',
                 'price' => 3500,
-                'brand' => null,
+                'brand' => 'なし',
                 'description' => 'おしゃれなショルダーバッグ',
                 'image' => 'items/dummy7.jpg',
                 'condition' => 'やや傷や汚れあり',
@@ -83,7 +83,7 @@ class ItemSeeder extends Seeder
             [
                 'name' => 'タンブラー',
                 'price' => 500,
-                'brand' => null,
+                'brand' => 'なし',
                 'description' => '使いやすいタンブラー',
                 'image' => 'items/dummy8.jpg',
                 'condition' => '状態が悪い',
@@ -101,7 +101,7 @@ class ItemSeeder extends Seeder
             [
                 'name' => 'メイクセット',
                 'price' => 2500,
-                'brand' => null,
+                'brand' => 'なし',
                 'description' => '便利なメイクアップセット',
                 'image' => 'items/dummy10.jpg',
                 'condition' => '良好',

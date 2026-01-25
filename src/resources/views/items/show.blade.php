@@ -36,10 +36,10 @@
                 <span class="likes-count">{{ $item->likes_count }}</span>
             </button>
             @else
-            <div class="like-display">
+            <a href="{{ route('login') }}" class="like-button">
                 <i class="star-icon">☆</i>
                 <span>{{ $item->likes_count }}</span>
-            </div>
+            </a>
             @endauth
 
             <div class="comment-display">
