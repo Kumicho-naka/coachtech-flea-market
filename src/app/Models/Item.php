@@ -75,4 +75,9 @@ class Item extends Model
     {
         return $this->comments()->count();
     }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
 }

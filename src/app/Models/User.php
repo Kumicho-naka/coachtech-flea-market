@@ -60,4 +60,35 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Item::class, 'purchases');
     }
+
+    public function buyerTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'buyer_id');
+    }
+
+    public function sellerTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'seller_id');
+    }
+
+    public function transactionMessages()
+    {
+        return $this->hasMany(TransactionMessage::class);
+    }
+
+    public function receivedRatings()
+    {
+        return $this->hasMany(UserRating::class, 'user_id');
+    }
+
+    public function givenRatings()
+    {
+        return $this->hasMany(UserRating::class, 'rater_id');
+    }
+
+    public function averageRating()
+    {
+        $average = $this->receivedRatings()->avg('rating');
+        return $average ? round($average) : 0;
+    }
 }
