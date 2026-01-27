@@ -6,6 +6,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionMessageController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -38,6 +40,12 @@ Route::middleware(['auth'])->group(function () {
     // 住所変更
     Route::get('/purchase/address/{item}', [PurchaseController::class, 'editAddress'])->name('purchase.address.edit');
     Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+
+    // 取引チャット
+    Route::get('/transaction/{transaction}', [TransactionController::class, 'chat'])->name('transactions.chat');
+
+    // メッセージ送信
+    Route::post('/transaction/{transaction}/message', [TransactionMessageController::class, 'store'])->name('transactions.message.store');
 });
 
 // メール認証関連（応用機能）

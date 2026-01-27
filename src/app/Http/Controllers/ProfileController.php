@@ -19,13 +19,64 @@ class ProfileController extends Controller
         $user = Auth::user();
         $page = $request->get('page', 'sell');
 
+        // 全ページで未読数を計算
+        $unreadCount = $user->buyerTransactions()
+            ->where(function ($query) {
+                $query->where('buyer_completed', false)
+                    ->orWhere('seller_completed', false);
+            })
+            ->get()
+            ->merge(
+                $user->sellerTransactions()
+                    ->where(function ($query) {
+                        $query->where('buyer_completed', false)
+                            ->orWhere('seller_completed', false);
+                    })
+                    ->get()
+            )
+            ->sum(function ($transaction) use ($user) {
+                return $transaction->unreadMessagesCount($user->id);
+            });
+
         if ($page === 'buy') {
             $items = $user->purchasedItems()->with(['categories', 'likes'])->latest()->get();
+        } elseif ($page === 'trading') {
+            $buyerTransactions = $user->buyerTransactions()
+                ->with(['item.categories', 'messages'])
+                ->where(function ($query) {
+                    $query->where('buyer_completed', false)
+                        ->orWhere('seller_completed', false);
+                })
+                ->get();
+
+            $sellerTransactions = $user->sellerTransactions()
+                ->with(['item.categories', 'messages'])
+                ->where(function ($query) {
+                    $query->where('buyer_completed', false)
+                        ->orWhere('seller_completed', false);
+                })
+                ->get();
+
+            $transactions = $buyerTransactions->merge($sellerTransactions)
+                ->sortByDesc(function ($transaction) {
+                    $latestMessage = $transaction->latestMessage();
+                    return $latestMessage ? $latestMessage->created_at : $transaction->created_at;
+                });
+
+            foreach ($transactions as $transaction) {
+                $transaction->unread_count = $transaction->unreadMessagesCount($user->id);
+            }
+
+            $averageRating = $user->averageRating();
+
+            return view('profile.show', compact('user', 'transactions', 'page', 'averageRating', 'unreadCount'));
         } else {
             $items = $user->items()->with(['categories', 'likes'])->latest()->get();
         }
 
-        return view('profile.show', compact('user', 'items', 'page'));
+        $averageRating = $user->averageRating();
+
+        return view('profile.show', compact('user', 'items', 'page', 'averageRating', 'unreadCount'));
     }
 
     public function edit()

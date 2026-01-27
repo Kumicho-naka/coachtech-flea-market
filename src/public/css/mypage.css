@@ -358,3 +358,101 @@
         line-height: 20px;
     }
 }
+
+/* 評価星 */
+.user-rating {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.star-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* 通知バッジ（タブ） */
+.tab-link {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    min-width: 27px;
+    height: 26px;
+    background: #FF0000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    padding: 0 5px;
+}
+
+/* 未読バッジ（商品カード） */
+.unread-badge {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    min-width: 20px;
+    height: 20px;
+    background: #FF0000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FFFFFF;
+    z-index: 3;
+}
+
+/* レスポンシブ対応（追加分） */
+@media (max-width: 768px) {
+    .star-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .notification-badge {
+        min-width: 22px;
+        height: 22px;
+        font-size: 18px;
+        line-height: 22px;
+        top: -3px;
+        right: -8px;
+    }
+
+    .unread-badge {
+        min-width: 18px;
+        height: 18px;
+        font-size: 9px;
+        line-height: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .star-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .notification-badge {
+        min-width: 20px;
+        height: 20px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+}

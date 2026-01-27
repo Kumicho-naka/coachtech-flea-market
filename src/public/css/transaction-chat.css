@@ -1,0 +1,500 @@
+/* 取引チャット画面 */
+
+.chat-container {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    background: #FFFFFF;
+}
+
+/* サイドバー */
+.chat-sidebar {
+    width: 259px;
+    background: #868686;
+    padding: 13px 0;
+    flex-shrink: 0;
+}
+
+.sidebar-title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: 0.1em;
+    color: #FFFFFF;
+    margin: 0 30px 20px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-item {
+    width: 197px;
+    height: 40px;
+    margin: 0 31px;
+    background: #EEEFEB;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.sidebar-item:hover {
+    background: #E0E1DD;
+}
+
+.sidebar-item.active {
+    background: #D9D9D9;
+}
+
+.item-name {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+
+/* メインコンテンツ */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ヘッダー */
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 31px 88px 31px 109px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+.user-avatar {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #D9D9D9;
+    flex-shrink: 0;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #D9D9D9;
+}
+
+.chat-title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    margin: 0;
+}
+
+.complete-button {
+    width: 172px;
+    height: 54px;
+    background: #FF8282;
+    border-radius: 30px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.complete-button:hover {
+    background: #FF6666;
+}
+
+/* 区切り線 */
+.divider {
+    width: 100%;
+    height: 2px;
+    background: #5F5F5F;
+}
+
+/* 商品情報 */
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 15px 109px;
+}
+
+.item-image {
+    width: 203px;
+    height: 206px;
+    background: #D9D9D9;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-placeholder {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item-name {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 58px;
+    color: #000000;
+    margin: 0;
+}
+
+.item-price {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    margin: 0;
+}
+
+/* チャットメッセージ */
+.chat-messages {
+    flex: 1;
+    padding: 30px 109px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.message-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.message-wrapper.message-left {
+    justify-content: flex-start;
+}
+
+.message-wrapper.message-right {
+    justify-content: flex-end;
+}
+
+.message-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #D9D9D9;
+    flex-shrink: 0;
+}
+
+.message-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder-small {
+    width: 100%;
+    height: 100%;
+    background: #D9D9D9;
+}
+
+.message-content {
+    max-width: 461px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+}
+
+.message-username {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.message-bubble {
+    background: #D9D9D9;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.message-image {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.message-text {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000000;
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.message-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.action-button {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #5F5F5F;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: color 0.2s;
+}
+
+.action-button:hover {
+    color: #FF5555;
+}
+
+/* メッセージ入力 */
+.message-input-section {
+    padding: 20px 109px 30px;
+}
+
+.message-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.message-input {
+    flex: 1;
+    height: 44px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 0 15px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    margin-right: 10px;
+}
+
+.message-input::placeholder {
+    color: #7B7B7B;
+}
+
+.image-upload-button {
+    box-sizing: border-box;
+    width: 143px;
+    height: 44px;
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+    background: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FF5555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.image-upload-button:hover {
+    background: #FF5555;
+    color: #FFFFFF;
+}
+
+.send-button {
+    width: 80px;
+    height: 61px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.send-button:hover {
+    background: #F5F5F5;
+}
+
+.send-button img {
+    width: 70px;
+    height: 55px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .chat-header {
+        padding: 20px 40px;
+    }
+
+    .item-info {
+        padding: 15px 40px;
+    }
+
+    .chat-messages {
+        padding: 20px 40px;
+    }
+
+    .message-input-section {
+        padding: 15px 40px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column;
+    }
+
+    .chat-sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .sidebar-list {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 20px;
+    }
+
+    .sidebar-item {
+        margin: 0;
+        min-width: 150px;
+    }
+
+    .chat-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-left {
+        gap: 15px;
+    }
+
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .chat-title {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .complete-button {
+        width: 100%;
+    }
+
+    .item-info {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 20px;
+    }
+
+    .item-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+    }
+
+    .item-name {
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .item-price {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .chat-messages {
+        padding: 15px 20px;
+    }
+
+    .message-input-section {
+        padding: 10px 20px 15px;
+    }
+
+    .message-form {
+        flex-wrap: wrap;
+    }
+
+    .message-input {
+        width: 100%;
+    }
+}
