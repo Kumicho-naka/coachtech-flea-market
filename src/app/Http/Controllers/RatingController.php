@@ -52,7 +52,7 @@ class RatingController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return redirect()->route('profile.show')
+        return redirect()->route('items.index')
             ->with('success', '評価を送信しました。');
     }
 }

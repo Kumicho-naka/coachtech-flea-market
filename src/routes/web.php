@@ -45,6 +45,9 @@ Route::middleware(['auth'])->group(function () {
     // 取引チャット
     Route::get('/transaction/{transaction}', [TransactionController::class, 'chat'])->name('transactions.chat');
 
+    // 取引完了
+    Route::post('/transaction/{transaction}/complete', [TransactionController::class, 'complete'])->name('transactions.complete');
+
     // メッセージ送信
     Route::post('/transaction/{transaction}/message', [TransactionMessageController::class, 'store'])->name('transactions.message.store');
 
