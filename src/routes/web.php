@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionMessageController;
+use App\Http\Controllers\RatingController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -46,6 +47,13 @@ Route::middleware(['auth'])->group(function () {
 
     // メッセージ送信
     Route::post('/transaction/{transaction}/message', [TransactionMessageController::class, 'store'])->name('transactions.message.store');
+
+    // メッセージ編集・削除
+    Route::put('/transaction/{transaction}/message/{message}', [TransactionMessageController::class, 'update'])->name('transactions.message.update');
+    Route::delete('/transaction/{transaction}/message/{message}', [TransactionMessageController::class, 'destroy'])->name('transactions.message.destroy');
+
+    // 評価送信
+    Route::post('/transaction/{transaction}/rating', [RatingController::class, 'store'])->name('ratings.store');
 });
 
 // メール認証関連（応用機能）

@@ -498,3 +498,114 @@
         width: 100%;
     }
 }
+
+/* 評価モーダル */
+.rating-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.rating-modal {
+    width: 598px;
+    background: #FDFCE6;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.modal-title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 42px;
+    color: #000000;
+    margin: 0 0 20px 0;
+}
+
+.modal-divider {
+    width: 100%;
+    height: 1px;
+    background: #000000;
+    margin: 20px 0;
+}
+
+.modal-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #868686;
+    margin: 20px 0;
+}
+
+.rating-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.star-rating {
+    display: flex;
+    gap: 13px;
+    margin: 20px 0;
+}
+
+.star-rate {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.star-rate:hover {
+    transform: scale(1.1);
+}
+
+.submit-rating-button {
+    width: 127px;
+    height: 49px;
+    background: #FF8282;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-rating-button:hover {
+    background: #FF6666;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .rating-modal {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .modal-title {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .star-rate {
+        width: 60px;
+        height: 60px;
+    }
+}

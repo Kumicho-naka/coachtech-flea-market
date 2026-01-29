@@ -39,10 +39,24 @@
                 <h1 class="chat-title">「{{ $partner->name }}」さんとの取引画面</h1>
             </div>
 
-            @if($transaction->buyer_id === $user->id)
-            <button class="complete-button" id="completeButton">
-                取引を完了する
-            </button>
+            @php
+            $isCompleted = ($transaction->buyer_id === $user->id && $transaction->buyer_completed)
+            || ($transaction->seller_id === $user->id && $transaction->seller_completed);
+            $canComplete = ($transaction->buyer_id === $user->id && !$transaction->buyer_completed)
+            || ($transaction->seller_id === $user->id && !$transaction->seller_completed);
+            @endphp
+
+            @if($canComplete)
+            <form action="{{ route('transactions.complete', $transaction) }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="complete-button" onclick="return confirm('取引を完了してもよろしいですか？');">
+                    取引を完了する
+                </button>
+            </form>
+            @elseif($isCompleted)
+            <div class="complete-button" style="background: #CCC; cursor: default;">
+                完了済み
+            </div>
             @endif
         </header>
 
@@ -88,13 +102,22 @@
                         <img src="{{ Storage::url($message->image_path) }}" alt="添付画像" class="message-image">
                         @endif
                         @if($message->message)
-                        <p class="message-text">{{ $message->message }}</p>
+                        <p class="message-text" id="message-text-{{ $message->id }}">{{ $message->message }}</p>
                         @endif
                     </div>
                     @if($message->user_id === $user->id)
                     <div class="message-actions">
-                        <button class="action-button">編集</button>
-                        <button class="action-button">削除</button>
+                        <button class="action-button edit-message-btn"
+                            data-message-id="{{ $message->id }}"
+                            data-message-text="{{ $message->message }}"
+                            data-update-url="{{ route('transactions.message.update', [$transaction, $message]) }}">
+                            編集
+                        </button>
+                        <form action="{{ route('transactions.message.destroy', [$transaction, $message]) }}" method="POST" style="display: inline;" onsubmit="return confirm('本当に削除しますか？');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="action-button">削除</button>
+                        </form>
                     </div>
                     @endif
                 </div>
@@ -138,4 +161,36 @@
         </section>
     </main>
 </div>
+
+<!-- 評価モーダル -->
+@if(session('show_rating_modal'))
+<div class="rating-modal-overlay" id="ratingModal">
+    <div class="rating-modal">
+        <h2 class="modal-title">取引が完了しました。</h2>
+        <div class="modal-divider"></div>
+
+        <p class="modal-subtitle">今回の取引相手はどうでしたか?</p>
+
+        <form action="{{ route('ratings.store', $transaction) }}" method="POST" class="rating-form" id="ratingForm">
+            @csrf
+            <div class="star-rating" id="starRating">
+                <input type="hidden" name="rating" id="ratingValue" value="0" required>
+                @for ($i = 1; $i <= 5; $i++)
+                    <img src="{{ asset('images/star-empty.svg') }}"
+                    alt="星{{ $i }}"
+                    class="star-rate"
+                    data-value="{{ $i }}"
+                    data-filled-url="{{ asset('images/star-filled.svg') }}"
+                    data-empty-url="{{ asset('images/star-empty.svg') }}"
+                    onclick="setRating({{ $i }})">
+                    @endfor
+            </div>
+
+            <div class="modal-divider"></div>
+
+            <button type="submit" class="submit-rating-button">送信する</button>
+        </form>
+    </div>
+</div>
+@endif
 @endsection

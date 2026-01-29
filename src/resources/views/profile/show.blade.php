@@ -7,6 +7,19 @@
 @endsection
 
 @section('content')
+
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-error">
+    {{ session('error') }}
+</div>
+@endif
+
 <div class="mypage-container">
     <!-- ユーザー情報セクション -->
     <div class="user-info">

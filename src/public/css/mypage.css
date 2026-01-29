@@ -456,3 +456,26 @@
         line-height: 20px;
     }
 }
+
+/* アラートメッセージ */
+.alert {
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.alert-success {
+    background: #D4EDDA;
+    border: 1px solid #C3E6CB;
+    color: #155724;
+}
+
+.alert-error {
+    background: #F8D7DA;
+    border: 1px solid #F5C6CB;
+    color: #721C24;
+}
