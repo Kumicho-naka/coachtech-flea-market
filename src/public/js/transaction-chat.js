@@ -24,33 +24,33 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-});
 
-// 入力情報保持機能
-const messageInput = document.getElementById('messageInput');
-const messageForm = document.getElementById('messageForm');
+    // 入力情報保持機能
+    const messageInput = document.getElementById('messageInput');
+    const messageForm = document.getElementById('messageForm');
 
-if (messageInput && messageForm) {
-    const transactionId = window.location.pathname.split('/').pop();
-    const storageKey = `transaction_message_${transactionId}`;
+    if (messageInput && messageForm) {
+        const transactionId = window.location.pathname.split('/').pop();
+        const storageKey = `transaction_message_${transactionId}`;
 
-    const savedMessage = sessionStorage.getItem(storageKey);
-    if (savedMessage && messageInput.value === '') {
-        messageInput.value = savedMessage;
-    }
-
-    messageInput.addEventListener('input', function () {
-        if (this.value.trim() !== '') {
-            sessionStorage.setItem(storageKey, this.value);
-        } else {
-            sessionStorage.removeItem(storageKey);
+        const savedMessage = sessionStorage.getItem(storageKey);
+        if (savedMessage && messageInput.value === '') {
+            messageInput.value = savedMessage;
         }
-    });
 
-    messageForm.addEventListener('submit', function () {
-        sessionStorage.removeItem(storageKey);
-    });
-}
+        messageInput.addEventListener('input', function () {
+            if (this.value.trim() !== '') {
+                sessionStorage.setItem(storageKey, this.value);
+            } else {
+                sessionStorage.removeItem(storageKey);
+            }
+        });
+
+        messageForm.addEventListener('submit', function () {
+            sessionStorage.removeItem(storageKey);
+        });
+    }
+});
 
 function editMessage(messageId, currentText, updateUrl, csrfToken) {
     const messageTextElement = document.getElementById('message-text-' + messageId);

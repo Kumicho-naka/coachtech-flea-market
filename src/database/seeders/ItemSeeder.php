@@ -12,12 +12,18 @@ class ItemSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::where('email', 'test@example.com')->first();
+        // ユーザー1: C001～C005の商品を出品
+        $seller1 = User::where('email', 'seller1@example.com')->first();
+        // ユーザー2: C006～C010の商品を出品
+        $seller2 = User::where('email', 'seller2@example.com')->first();
+
         $conditions = Condition::all();
         $categories = Category::all();
 
         $items = [
+            // C001～C005: ユーザー1の商品
             [
+                'user' => $seller1,
                 'name' => '腕時計',
                 'price' => 15000,
                 'brand' => 'Rolax',
@@ -27,6 +33,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['ファッション', 'メンズ'],
             ],
             [
+                'user' => $seller1,
                 'name' => 'HDD',
                 'price' => 5000,
                 'brand' => '西芝',
@@ -36,6 +43,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['その他'],
             ],
             [
+                'user' => $seller1,
                 'name' => '玉ねぎ3束',
                 'price' => 300,
                 'brand' => 'なし',
@@ -45,6 +53,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['その他'],
             ],
             [
+                'user' => $seller1,
                 'name' => '革靴',
                 'price' => 4000,
                 'brand' => 'なし',
@@ -54,6 +63,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['ファッション', 'メンズ'],
             ],
             [
+                'user' => $seller1,
                 'name' => 'ノートPC',
                 'price' => 45000,
                 'brand' => 'なし',
@@ -62,7 +72,9 @@ class ItemSeeder extends Seeder
                 'condition' => '良好',
                 'categories' => ['その他'],
             ],
+            // C006～C010: ユーザー2の商品
             [
+                'user' => $seller2,
                 'name' => 'マイク',
                 'price' => 8000,
                 'brand' => 'なし',
@@ -72,6 +84,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['その他'],
             ],
             [
+                'user' => $seller2,
                 'name' => 'ショルダーバッグ',
                 'price' => 3500,
                 'brand' => 'なし',
@@ -81,6 +94,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['ファッション', 'レディース'],
             ],
             [
+                'user' => $seller2,
                 'name' => 'タンブラー',
                 'price' => 500,
                 'brand' => 'なし',
@@ -90,6 +104,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['インテリア・住まい・小物'],
             ],
             [
+                'user' => $seller2,
                 'name' => 'コーヒーミル',
                 'price' => 4000,
                 'brand' => 'Starbacks',
@@ -99,6 +114,7 @@ class ItemSeeder extends Seeder
                 'categories' => ['インテリア・住まい・小物'],
             ],
             [
+                'user' => $seller2,
                 'name' => 'メイクセット',
                 'price' => 2500,
                 'brand' => 'なし',
@@ -112,8 +128,9 @@ class ItemSeeder extends Seeder
         foreach ($items as $itemData) {
             $condition = $conditions->where('name', $itemData['condition'])->first();
             $categoryNames = $itemData['categories'];
+            $user = $itemData['user'];
 
-            unset($itemData['condition'], $itemData['categories']);
+            unset($itemData['condition'], $itemData['categories'], $itemData['user']);
 
             $item = Item::create([
                 'user_id' => $user->id,

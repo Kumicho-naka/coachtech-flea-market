@@ -1,7 +1,15 @@
 # COACHTECH フリマ
 
 COACHTECHが開発した独自のフリマアプリケーション。  
-商品の出品、購入、いいね、コメント機能を備えたフリマサービス。
+商品の出品、購入、いいね、コメント、取引チャット、評価機能を備えたフリマサービス。
+
+## 更新履歴
+- **2026/01/31**: 取引チャット・評価機能を追加
+  - 取引メッセージ送信・編集・削除機能
+  - 取引完了・評価機能（購入者・出品者）
+  - メール通知機能
+  - ER図更新（transactions, transaction_messages, user_ratingsテーブル追加）
+  - テストアカウント変更（seller1, seller2, buyer）
 
 ---
 
@@ -80,6 +88,8 @@ php artisan config:clear
 ## ER図
 ![ER図](docs/erd.png)
 
+> **2026/01/31更新**: transactions, transaction_messages, user_ratingsテーブルを追加
+
 ---
 
 ## URL
@@ -89,9 +99,20 @@ php artisan config:clear
 ---
 
 ## アカウント情報
-テスト用アカウント:
-- メールアドレス: test@example.com
-- パスワード: password
+
+テスト用アカウント（3つ作成されます）:
+
+| 役割 | メールアドレス | パスワード | 出品商品 |
+|---|---|---|---|
+| 出品者1 | seller1@example.com | password | C001～C005（腕時計、HDD、玉ねぎ、革靴、ノートPC） |
+| 出品者2 | seller2@example.com | password | C006～C010（マイク、バッグ、タンブラー、コーヒーミル、メイク） |
+| 購入者 | buyer@example.com | password | 商品なし（購入・取引用） |
+
+> **2026/01/31更新**:機能追加に伴い、テスト用アカウント情報を変更。
+
+**取引テスト用:**
+- 購入者（buyer@example.com）が出品者1の商品2つを購入済み
+- 取引チャット機能のテストが可能
 
 ---
 
@@ -133,3 +154,12 @@ docker run --rm -it \
 ```bash
 php artisan test
 ```
+### 取引チャット・評価機能
+1. `buyer@example.com` / `password` でログイン
+2. マイページ → 「取引中の商品」タブをクリック
+3. 商品をクリックして取引チャット画面を表示
+4. メッセージ送信、編集、削除機能をテスト
+5. 「取引を完了する」ボタンをクリック
+6. 評価モーダルで星を選択して送信
+7. 出品者側: `seller1@example.com` でログイン → 評価を確認
+8. メール確認: Mailtrap

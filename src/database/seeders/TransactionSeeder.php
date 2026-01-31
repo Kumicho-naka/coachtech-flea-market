@@ -14,18 +14,12 @@ class TransactionSeeder extends Seeder
 {
     public function run()
     {
-        $buyer = User::where('email', 'test@example.com')->first();
+        // 購入者（ユーザー3）
+        $buyer = User::where('email', 'buyer@example.com')->first();
+        // 出品者（ユーザー1）
+        $seller = User::where('email', 'seller1@example.com')->first();
 
-        $seller = User::firstOrCreate(
-            ['email' => 'seller@example.com'],
-            [
-                'name' => '出品者テスト',
-                'password' => bcrypt('password'),
-                'email_verified_at' => now(),
-            ]
-        );
-
-        $items = Item::take(2)->get();
+        $items = Item::where('user_id', $seller->id)->take(2)->get();
 
         foreach ($items as $index => $item) {
             Purchase::create([
@@ -71,7 +65,8 @@ class TransactionSeeder extends Seeder
             }
         }
 
-        $completedItem = Item::skip(2)->first();
+        // 完了済み取引
+        $completedItem = Item::where('user_id', $seller->id)->skip(2)->first();
 
         if ($completedItem) {
             $completedTransaction = Transaction::create([

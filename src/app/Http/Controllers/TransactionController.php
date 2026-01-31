@@ -55,6 +55,23 @@ class TransactionController extends Controller
                 return $latest ? $latest->created_at : $t->created_at;
             });
 
+        // 出品者が購入者完了後にアクセスした時、評価モーダルを表示
+        if (
+            $transaction->seller_id === $user->id &&
+            $transaction->buyer_completed &&
+            !$transaction->seller_completed
+        ) {
+
+            // 既に評価済みかチェック
+            $hasRated = $user->givenRatings()
+                ->where('transaction_id', $transaction->id)
+                ->exists();
+
+            if (!$hasRated) {
+                session()->flash('show_rating_modal', true);
+            }
+        }
+
         return view('transactions.chat', compact('transaction', 'messages', 'otherTransactions', 'user'));
     }
 
@@ -62,38 +79,37 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
 
+        // 権限チェック
         if ($transaction->buyer_id !== $user->id && $transaction->seller_id !== $user->id) {
             abort(403, 'この取引にアクセスする権限がありません。');
         }
 
+        // 購入者のみが取引完了操作を行える
         if ($transaction->buyer_id === $user->id) {
             if (!$transaction->buyer_completed) {
                 $transaction->buyer_completed = true;
                 $transaction->save();
 
+                // 出品者にメール送信
                 Mail::to($transaction->seller->email)
                     ->send(new TransactionCompletedMail($transaction));
-            }
-        } else {
-            $transaction->seller_completed = true;
-            $transaction->save();
-        }
 
-        if ($transaction->buyer_completed && $transaction->seller_completed) {
-            $hasRated = $user->givenRatings()
-                ->where('transaction_id', $transaction->id)
-                ->exists();
+                // 購入者が完了ボタンをクリック → 評価モーダル表示
+                $hasRated = $user->givenRatings()
+                    ->where('transaction_id', $transaction->id)
+                    ->exists();
 
-            if (!$hasRated) {
-                return redirect()->route('transactions.chat', $transaction)
-                    ->with('show_rating_modal', true);
-            } else {
-                return redirect()->route('profile.show')
-                    ->with('success', '取引が完了しました。');
+                if (!$hasRated) {
+                    return redirect()->route('transactions.chat', $transaction)
+                        ->with('show_rating_modal', true);
+                } else {
+                    return redirect()->route('transactions.chat', $transaction)
+                        ->with('success', '取引を完了しました。');
+                }
             }
         }
 
-        return redirect()->route('transactions.chat', $transaction)
-            ->with('success', '取引を完了しました。相手も完了すると評価画面が表示されます。');
+        // 出品者がアクセスした場合は何もせずリダイレクト
+        return redirect()->route('transactions.chat', $transaction);
     }
 }

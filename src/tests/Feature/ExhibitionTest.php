@@ -81,7 +81,7 @@ class ExhibitionTest extends TestCase
         /** @var \App\Models\Item $item */
         $item = Item::where('name', self::ITEM_NAME)->first();
 
-        $this->assertDatabaseHas('item_categories', [
+        $this->assertDatabaseHas('category_item', [
             'item_id' => $item->id,
             'category_id' => $category->id,
         ]);

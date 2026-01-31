@@ -55,12 +55,12 @@
     background: #D9D9D9;
 }
 
-.item-name {
+.sidebar-item .item-name {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 18px;
+    line-height: 22px;
     color: #000000;
 }
 
@@ -74,9 +74,10 @@
 /* ヘッダー */
 .chat-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 31px 88px 31px 109px;
+    align-items: center;
+    padding: 31px 109px;
+    position: relative;
 }
 
 .header-left {
@@ -134,6 +135,30 @@
 
 .complete-button:hover {
     background: #FF6666;
+}
+
+
+.complete-button:hover {
+    background: #FF6666;
+}
+
+/* 完了済みボタン（グレーアウト） */
+.complete-button-disabled {
+    width: 172px;
+    height: 54px;
+    background: #CCCCCC;
+    border-radius: 30px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 区切り線 */
@@ -608,4 +633,18 @@
         width: 60px;
         height: 60px;
     }
+}
+
+/* エラーメッセージ */
+.error-messages {
+    padding: 10px 20px;
+    margin: 10px 109px;
+}
+
+.error-message {
+    color: #FF0000;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 5px 0;
 }

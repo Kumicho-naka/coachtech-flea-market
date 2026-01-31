@@ -24,7 +24,7 @@ class RatingController extends Controller
         }
 
         // 両者が取引を完了しているかチェック
-        if (!$transaction->buyer_completed || !$transaction->seller_completed) {
+        if (!$transaction->buyer_completed) {
             return redirect()->route('transactions.chat', $transaction)
                 ->with('error', '取引が完了していません。');
         }
@@ -52,6 +52,13 @@ class RatingController extends Controller
             'rating' => $request->rating,
         ]);
 
+        // 出品者が評価を送信した場合、seller_completedをtrueに
+        if ($transaction->seller_id === $user->id) {
+            $transaction->seller_completed = true;
+            $transaction->save();
+        }
+
+        // 商品一覧画面に遷移
         return redirect()->route('items.index')
             ->with('success', '評価を送信しました。');
     }

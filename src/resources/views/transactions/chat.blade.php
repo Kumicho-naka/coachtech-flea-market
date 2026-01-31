@@ -40,23 +40,24 @@
             </div>
 
             @php
-            $isCompleted = ($transaction->buyer_id === $user->id && $transaction->buyer_completed)
-            || ($transaction->seller_id === $user->id && $transaction->seller_completed);
-            $canComplete = ($transaction->buyer_id === $user->id && !$transaction->buyer_completed)
-            || ($transaction->seller_id === $user->id && !$transaction->seller_completed);
+            // 購入者のみボタン表示
+            $isBuyer = $transaction->buyer_id === $user->id;
+            $buyerCompleted = $transaction->buyer_completed;
             @endphp
 
-            @if($canComplete)
+            @if($isBuyer)
+            @if(!$buyerCompleted)
             <form action="{{ route('transactions.complete', $transaction) }}" method="POST" style="display: inline;">
                 @csrf
                 <button type="submit" class="complete-button" onclick="return confirm('取引を完了してもよろしいですか？');">
                     取引を完了する
                 </button>
             </form>
-            @elseif($isCompleted)
-            <div class="complete-button" style="background: #CCC; cursor: default;">
+            @else
+            <div class="complete-button-disabled">
                 完了済み
             </div>
+            @endif
             @endif
         </header>
 
@@ -135,6 +136,14 @@
             @endforeach
         </section>
 
+        <!-- エラーメッセージ表示 -->
+        @if ($errors->any())
+        <div class="error-messages">
+            @foreach ($errors->all() as $error)
+            <p class="error-message">{{ $error }}</p>
+            @endforeach
+        </div>
+        @endif
         <!-- メッセージ入力 -->
         <section class="message-input-section">
             <form action="{{ route('transactions.message.store', $transaction) }}" method="POST" enctype="multipart/form-data" class="message-form" id="messageForm">
@@ -193,4 +202,9 @@
     </div>
 </div>
 @endif
+
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/transaction-chat.js') }}"></script>
 @endsection
