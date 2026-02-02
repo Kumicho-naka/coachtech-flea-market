@@ -22,6 +22,7 @@
                 <img src="{{ asset('logo.svg') }}" alt="COACHTECH">
             </a>
 
+            @unless(Request::routeIs('transactions.chat'))
             <div class="search-container">
                 <form method="GET" action="{{ route('items.index') }}">
                     @if(request('tab'))
@@ -54,6 +55,7 @@
                 <a href="{{ route('login') }}" class="button-primary">出品</a>
                 @endauth
             </nav>
+            @endunless
         </div>
     </header>
 

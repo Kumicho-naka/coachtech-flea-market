@@ -136,16 +136,17 @@
             @endforeach
         </section>
 
-        <!-- エラーメッセージ表示 -->
-        @if ($errors->any())
-        <div class="error-messages">
-            @foreach ($errors->all() as $error)
-            <p class="error-message">{{ $error }}</p>
-            @endforeach
-        </div>
-        @endif
         <!-- メッセージ入力 -->
         <section class="message-input-section">
+            <!-- エラーメッセージ表示 -->
+            @if ($errors->any())
+            <div class="error-messages">
+                @foreach ($errors->all() as $error)
+                <p class="error-message">{{ $error }}</p>
+                @endforeach
+            </div>
+            @endif
+            
             <form action="{{ route('transactions.message.store', $transaction) }}" method="POST" enctype="multipart/form-data" class="message-form" id="messageForm">
                 @csrf
                 <input type="text"

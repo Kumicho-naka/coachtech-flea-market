@@ -90,7 +90,7 @@
 }
 
 .tab-link {
-    width: 155px;
+    width: 180px;
     height: 40px;
     font-family: 'Inter', sans-serif;
     font-style: normal;
@@ -103,6 +103,7 @@
     text-decoration: none;
     transition: color 0.2s;
     padding-bottom: 5px;
+    padding-right: 35px;
 }
 
 .tab-link:hover {
@@ -380,8 +381,9 @@
 
 .notification-badge {
     position: absolute;
-    top: -5px;
-    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0px;
     min-width: 27px;
     height: 26px;
     background: #FF0000;
@@ -420,26 +422,69 @@
 }
 
 /* レスポンシブ対応（追加分） */
-@media (max-width: 768px) {
+@media (min-width: 768px) and (max-width: 850px) {
+    .mypage-container {
+        padding: 50px 0 80px;
+    }
+
+    .user-info {
+        flex-direction: column;
+        gap: 25px;
+        padding: 0 40px;
+        margin-bottom: 50px;
+    }
+
+    .profile-avatar,
+    .profile-avatar-placeholder {
+        width: 130px;
+        height: 130px;
+    }
+
+    .user-name {
+        font-size: 30px;
+        line-height: 38px;
+        width: auto;
+    }
+
+    .profile-edit-button {
+        width: 260px;
+        height: 52px;
+        font-size: 22px;
+    }
+
     .star-icon {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .tab-navigation {
+        padding: 0 40px;
+        gap: 25px;
+        margin-bottom: 70px;
+    }
+
+    .tab-link {
+        width: auto;
+        min-width: 140px;
+        font-size: 20px;
+        white-space: nowrap;
+        padding-right: 30px;
     }
 
     .notification-badge {
+        right: 0px;
+        font-size: 18px;
         min-width: 22px;
         height: 22px;
-        font-size: 18px;
-        line-height: 22px;
-        top: -3px;
-        right: -8px;
     }
 
-    .unread-badge {
-        min-width: 18px;
-        height: 18px;
-        font-size: 9px;
-        line-height: 11px;
+    .items-section {
+        padding: 0 40px;
+    }
+
+    .items-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px 25px;
     }
 }
 
